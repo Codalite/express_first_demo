@@ -1,5 +1,5 @@
 // controllers/userController.js
-import { User } from '../models/user.models.js';
+import { User } from '../models/userModels.js';
 
 export const getUsers = async (req, res) => {
   const users = await User.find();
