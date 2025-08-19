@@ -1,12 +1,23 @@
-import express,{Router} from "express"
+// app.js
+import express from 'express';
+import dotenv from 'dotenv';
+import { connectDB } from './database/db.js';
+import userRoutes from './routes/user.routes.js';
 
-const app= express()
-app.use(express.json())
-app.use(express.urlencoded())
-app.use(express.text())
+dotenv.config();
 
+const app = express();
+app.use(express.json());
 
-app.listen(8080,(err)=>{
-    console.log("app running on port 8080");
-    
-})
+// Connect to DB
+await connectDB();
+
+// Routes
+app.use('/api/users', userRoutes);
+
+app.get('/', (req, res) => {
+  res.send('API is running...');
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT} at http://localhost${PORT}` ));
