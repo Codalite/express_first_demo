@@ -1,37 +1,36 @@
-import express,{Router} from "express"
-import route from "./users.js"
-const app= express()
-app.use(express.json())
-app.use(express.urlencoded())
-app.use(express.text())
+// app.js
+import express from 'express';
+import dotenv from 'dotenv';
+import { connectDB } from './database/db.js';
+import userRoutes from "./routes/userRoutes.js";
+import {errorHandler} from "./middlewares/errorMiddleware.js"
+import { apiLimiter } from './middlewares/rateLimiter.js';
+import { swaggerDocs } from './middlewares/swagger.js';
+
+dotenv.config();
+
+const app = express();
+app.use(express.json());
+app.use('/api/', apiLimiter);
 
 
+//make sure the error handler middleware is the last middleware
 
-app.use("/api",route)
+// Connect to DB
+await connectDB();
+/**
+ * @swagger
+ * tags:
+ *   name: Users
+ *   description: User management and authentication
+ */
+// Routes
+app.use('/api/users', userRoutes);
 
-app.get("/",(req,res)=>{
-    return res.status(200).send({"data":"hello there coder"})
-})
-
-app.post("/",(req,res)=>{
-    console.log(req.body);
-    return res.status(201).send("created")
-    
-})
-app.put("/:id",(req,res)=>{
-    console.log(req.params.id);
-    console.log(req.query.user);
-    return res.status(201).send("created")
-    
-})
-app.delete("/:id",(req,res)=>{
-    console.log(req.body);
-    return res.status(201).send("created")
-    
-})
-
-
-app.listen(8080,(err)=>{
-    console.log("app running on port 8080");
-    
-})
+app.get('/', (req, res) => {
+  res.send('API is running...');
+});
+app.use(errorHandler)
+swaggerDocs(app);
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT} at http://localhost:${PORT}` ));
