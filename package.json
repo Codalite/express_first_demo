@@ -5,11 +5,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-<<<<<<< HEAD
     "dev": "node--watch app.js",
-=======
-    "dev": "node --watch --env-file=process.env app.js",
->>>>>>> a901458bca649888d399b57a0d6c1d142aaa0c7e
+
     "start": "node app.js"
   },
   "author": "coder miki at Codalite",
