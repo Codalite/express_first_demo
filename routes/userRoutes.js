@@ -7,7 +7,6 @@ import { protect } from '../middlewares/authMiddleware.js';
 const router = express.Router();
 
 
-
 /**
  * @swagger
  * /api/users:
@@ -174,7 +173,6 @@ router.put('/:id',protect, updateUser);
  *       200:
  *         description: Password updated
  */
-
 router.patch('/',protect, updateUserPassword);
 /**
  * @swagger
@@ -205,6 +203,5 @@ router.patch('/',protect, updateUserPassword);
  *       200:
  *         description: Password updated
  */
-
-router.patch('/:id',protect, updateUserPassword);
+router.patch("/:id",protect, updateUserPassword);
 export default router;

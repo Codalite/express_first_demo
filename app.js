@@ -7,7 +7,6 @@ import {errorHandler} from "./middlewares/errorMiddleware.js"
 import { apiLimiter } from './middlewares/rateLimiter.js';
 import { swaggerDocs } from './middlewares/swagger.js';
 
-
 dotenv.config();
 
 const app = express();

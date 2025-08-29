@@ -5,10 +5,10 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon app.js",
+    "dev": "node --watch --env-file=process.env app.js",
     "start": "node app.js"
   },
-  "author": "coder miki",
+  "author": "coder miki at Codalite",
   "license": "ISC",
   "description": "",
   "dependencies": {
