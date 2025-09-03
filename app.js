@@ -3,6 +3,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { connectDB } from './database/db.js';
 import userRoutes from "./routes/userRoutes.js";
+import todoRoute from './routes/todoRoutes.js';
 import {errorHandler} from "./middlewares/errorMiddleware.js"
 import { apiLimiter } from './middlewares/rateLimiter.js';
 import { swaggerDocs } from './middlewares/swagger.js';
@@ -26,6 +27,7 @@ await connectDB();
  */
 // Routes
 app.use('/api/users', userRoutes);
+app.use('/api/todos', todoRoute);
 
 app.get('/', (req, res) => {
   res.send('API is running...');
